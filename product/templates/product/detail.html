@@ -1,0 +1,92 @@
+{%extends 'base.html'%}
+{%block content %}
+<br>
+<section class="section-content bg padding-y-sm">
+<div class="container" style="horizontal-align: middle; margin-left:150px;">
+
+<div class="row">
+<div class="col-xl-10 col-md-9 col-sm-12">
+
+
+<main class="card">
+	<div class="row no-gutters">
+		<aside class="col-sm-6 border-right">
+<article class="gallery-wrap">
+<div class="img-big-wrap">
+  <div> <a href="#" data-fancybox=""><img src="{{product.image.url}}" ></a></div>
+</div> <!-- slider-product.// -->
+<!-- slider-nav.// -->
+</article> <!-- gallery-wrap .end// -->
+		</aside>
+		<aside class="col-sm-6">
+<article class="card-body">
+<!-- short-info-wrap -->
+
+
+
+
+<dl class="row">
+  <dt class="col-sm-4">Title</dt>
+  <dd class="col-sm-8">{{product.title}}</dd>
+
+  <dt class="col-sm-4">Manufacturer</dt>
+  <dd class="col-sm-8"> {{product.manufacturer}} </dd>
+
+  <dt class="col-sm-4">Price</dt>
+  <dd class="col-sm-8">{{product.price}} </dd>
+
+  <dt class="col-sm-4">Description</dt>
+  <dd class="col-sm-8">{{product.description}}</dd>
+</dl>
+<div class="rating-wrap">
+
+	<ul class="rating-stars">
+		<li style="width:80%" class="stars-active">
+			<i class="fa fa-star"></i> <i class="fa fa-star"></i>
+			<i class="fa fa-star"></i> <i class="fa fa-star"></i>
+
+		</li>
+		<li>
+			<i class="fa fa-star"></i> <i class="fa fa-star"></i>
+			<i class="fa fa-star"></i> <i class="fa fa-star"></i>
+
+		</li>
+	</ul>
+	
+</div> <!-- rating-wrap.// -->
+<hr>
+	<div class="row">
+		 <!-- col.// -->
+		<d<!-- col.// -->
+	</div>
+  <form>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Comment</label>
+      <input type="textbox" class="form-control" name="title" placeholder="Add a Comment">
+    </div>
+
+  </div>
+  </form><!-- row.// -->
+	<hr>
+	<!-- <a href="#" class="btn  btn-warning"> <i class="fa fa-envelope"></i> Contact Supplier </a> -->
+	<!-- <a href="#" class="btn  btn-outline-warning"> Start Order </a> -->
+<!-- short-info-wrap .// -->
+</article> <!-- card-body.// -->
+		</aside> <!-- col.// -->
+	</div> <!-- row.// -->
+</main> <!-- card.// -->
+
+<!-- PRODUCT DETAIL -->
+
+
+<!-- PRODUCT DETAIL .// -->
+
+
+
+</div><!-- container // -->
+
+</section>
+
+
+{% endblock %}

@@ -1,1 +1,25 @@
-<h1>Home</h1>
+{% extends 'base.html' %}
+{%block content%}
+    {%for product in products.all%}
+    <br>
+    <div class="card mb-3 mx-auto" style="max-width: 700px; cursor:pointer;" onclick="window.location='{%url 'detail' product.id%}';">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <img src="{{product.image.url}}" class="card-img" alt="..." width="500px" height="200px">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{product.title}}</h5>
+            <p class="card-text">{{product.description}}</p>
+            <p class="card-text">Price {{product.price}}</p>
+            <p class="card-text">Rating {{product.rating}}</p>
+
+            <p class="card-text"><small class="text-muted">Added Date</small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    {%endfor%}
+{% endblock %}

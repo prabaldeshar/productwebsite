@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{%extends 'base.html'%}
+{%block content%}
+  <br>
+<br>
+  <body>
+    {% if error %}
+    {{error}}
+    {% endif %}
+    <form action="{% url 'add' %}" enctype="multipart/form-data" method="POST">
+      {%csrf_token%}
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputEmail4">Title</label>
+          <input type="text" class="form-control" name="title" placeholder="Title">
+        </div>
+
+      </div>
+      <div class="form-group">
+        <label for="inputAddress">Description</label>
+        <input type="text" class="form-control" name="description" id="inputAddress" placeholder="Description about the Prdouct">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputCity">Image</label>
+          <input type="file" name="image" class="form-control" id="inputCity">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="inputState">Price</label>
+          <input type="text" name="price" class="form-control" id="inputCity">
+
+        </div>
+
+      </div>
+      <div class="form-row col-md-6">
+        <label for="inputCity">Manufacturer</label>
+        <input type="text" name="manufacturer" class="form-control" id="inputCity">
+      </div>
+      <br>
+      <button type="submit" class="btn btn-primary">Add product</button>
+
+    </form>
+  </body>
+
+{% endblock %}
