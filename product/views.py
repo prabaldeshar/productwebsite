@@ -4,7 +4,7 @@ from .models import Products
 # Create your views here.
 def home(request):
     products = Products.objects
-    return render(request,'product/home.html',{'products':products})\
+    return render(request,'product/home.html',{'products':products})
 
 def add(request):
     if request.method=='POST':
