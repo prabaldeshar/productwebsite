@@ -7,6 +7,7 @@
     {% if error %}
     {{error}}
     {% endif %}
+    <div class="container">
     <form action="{% url 'add' %}" enctype="multipart/form-data" method="POST">
       {%csrf_token%}
       <div class="form-row">
@@ -41,6 +42,7 @@
       <button type="submit" class="btn btn-primary">Add product</button>
 
     </form>
+  </div>
   </body>
 
 {% endblock %}

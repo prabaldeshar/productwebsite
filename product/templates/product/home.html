@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
+
 {%block content%}
+<br/>
+
     {%for product in products.all%}
     <br>
     <div class="card mb-3 mx-auto" style="max-width: 700px; cursor:pointer;" onclick="window.location='{%url 'detail' product.id%}';">

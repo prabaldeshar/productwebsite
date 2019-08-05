@@ -1,6 +1,9 @@
 {%extends 'base.html'%}
 {%block content %}
 <br>
+<br>
+{{message}} {{sentiment}}
+{{error}}
 <section class="section-content bg padding-y-sm">
 <div class="container" style="horizontal-align: middle; margin-left:150px;">
 
@@ -12,9 +15,12 @@
 	<div class="row no-gutters">
 		<aside class="col-sm-6 border-right">
 <article class="gallery-wrap">
-<div class="img-big-wrap">
-  <div> <a href="#" data-fancybox=""><img src="{{product.image.url}}" ></a></div>
-</div> <!-- slider-product.// -->
+	<div class="col-md-2">
+<div class="img-fluid img-thumbnail">
+   <img src="{{product.image.url}}" width="900px" height="450px"></a>
+ </div>
+</div>
+</div><!-- slider-product.// -->
 <!-- slider-nav.// -->
 </article> <!-- gallery-wrap .end// -->
 		</aside>
@@ -37,21 +43,11 @@
 
   <dt class="col-sm-4">Description</dt>
   <dd class="col-sm-8">{{product.description}}</dd>
+	<dt class="col-sm-4">Rating</dt>
+  <dd class="col-sm-8">{{product.rating}}</dd>
 </dl>
 <div class="rating-wrap">
 
-	<ul class="rating-stars">
-		<li style="width:80%" class="stars-active">
-			<i class="fa fa-star"></i> <i class="fa fa-star"></i>
-			<i class="fa fa-star"></i> <i class="fa fa-star"></i>
-
-		</li>
-		<li>
-			<i class="fa fa-star"></i> <i class="fa fa-star"></i>
-			<i class="fa fa-star"></i> <i class="fa fa-star"></i>
-
-		</li>
-	</ul>
 
 </div> <!-- rating-wrap.// -->
 <hr>
@@ -59,16 +55,17 @@
 		 <!-- col.// -->
 		<d<!-- col.// -->
 	</div>
-  <form method="POST">
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="inputEmail4">Comment</label>
-      <input type="textbox" class="form-control" name="title" placeholder="Add a Comment">
-			<br/>
-			<input type="submit"  class="btn btn-primary" name="" value="Comment"></input>
-    </div>
+  <form method="POST" action="{% url 'post' product.id %}" enctype="multipart/form-data">
+		{%csrf_token%}
 
-  </div>
+			<div class="form-group col-md-9">
+				<label for="inputEmail4">Comment</label>
+				<input type="textbox" class="form-control form-control-lg"  name="comment" placeholder="Add a Comment">
+				<br/>
+				<input type="submit"  class="btn btn-primary" name="" value="Comment">
+			</div>
+
+
   </form><!-- row.// -->
 	<hr>
 	<!-- <a href="#" class="btn  btn-warning"> <i class="fa fa-envelope"></i> Contact Supplier </a> -->
