@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{%extends 'base.html'%}
+{%block content %}
+  <body>
+    {{product.title}}
+    <div class="container">
+    {{div| safe}}
+    </div>
+  </body>
+  <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-1.3.2.min.js"></script>
+   <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.3.2.min.js"></script>
+   <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-tables-1.3.2.min.js"></script>
+   <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-api-1.3.2.min.js"></script>
+   {{script | safe}}
+
+{% endblock %}

@@ -21,10 +21,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 import product.views
 import accounts.views
+from visualize import views as visualize_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home, name='home'),
     path('product/', include('product.urls')),
     path('accounts/',include('accounts.urls')),
+    path('visualize/<int:product_id>', visualize_views.visualize, name='visualize'),
+
 ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

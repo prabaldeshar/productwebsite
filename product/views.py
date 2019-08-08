@@ -36,31 +36,38 @@ def add(request):
 
 def detail(request, product_id):
     product = get_object_or_404(Products, pk= product_id)
-    return render(request, 'product/detail.html', {'product':product})
+    comments = Comment.objects.select_related().filter(pk=product.id)
+    return render(request, 'product/detail.html', {'product':product,'comments':comments})
 
 def post(request, product_id):
     if request.method == 'POST':
+        calcRating()
         current_user = request.user
         product = Products.objects.filter(pk=product_id).first()
         if request.POST['comment']:
             text = request.POST['comment']
             polarity = makepredictions(text)
             comment = Comment(comment= text, user=current_user,product = product, polarity=polarity)
+
             comment.save()
-            calcRating()
+
 
             return render(request, 'product/predict.html')
 
 def calcRating():
     products = Products.objects.all()
-    total_rating=0
-    pos_rating=0
+    total_rating=1
+    pos_rating=1
     for product in products:
         comments = Comment.objects.select_related().filter(pk=product.id)
         for comment in comments:
             total_rating+=1
-            if comment.polarity==1:
+            if comment.polarity == 1:
                 pos_rating+=1
+            else:
+                pos_rating = pos_rating
+
         percentage=(pos_rating/total_rating)*100
-        product.rating = percentage
+        rating = (percentage/100)*5
+        product.rating = rating
         product.save()

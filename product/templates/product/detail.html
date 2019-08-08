@@ -1,91 +1,107 @@
+
 {%extends 'base.html'%}
 {%block content %}
+{% load staticfiles %}
 <br>
 <br>
-{{message}} {{sentiment}}
+{{message}}{{sentiment}}
 {{error}}
+<!-- you can delete following links-->
+<link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+  <link href="{% static 'open-iconic/font/css/open-iconic-bootstrap.css'%}" rel="stylesheet">
+
 <section class="section-content bg padding-y-sm">
-<div class="container" style="horizontal-align: middle; margin-left:150px;">
-
-<div class="row">
-<div class="col-xl-10 col-md-9 col-sm-12">
-
-
-<main class="card">
+	<div class="container" sytle="horizontal-align: middle; margin-left:150px;">
+		<div class="row">
+			<div class="col-x1-10 col-md-9-col-sm-12">
+				<main class="card">
 	<div class="row no-gutters">
-		<aside class="col-sm-6 border-right">
+		<aside class="col-sm-5 border-right">
 <article class="gallery-wrap">
-	<div class="col-md-2">
-<div class="img-fluid img-thumbnail">
-   <img src="{{product.image.url}}" width="900px" height="450px"></a>
- </div>
-</div>
-</div><!-- slider-product.// -->
-<!-- slider-nav.// -->
+<div class="img-big-wrap">
+  <div> <img  src="{{ product.image.url }}" width="100%" height="auto">
+</div> <!-- slider-product.// -->
 </article> <!-- gallery-wrap .end// -->
 		</aside>
-		<aside class="col-sm-6">
-<article class="card-body">
-<!-- short-info-wrap -->
+		<aside class="col-sm-7">
+<article class="p-5">
+	<h3 class="title mb-3">{{product.title}}</h3>
+	<h6 class="title mb-3">{{product.manufacturer}}</h6>
 
+<div class="mb-3">
+	<var class="price h3 text-warning">
+		<span class="currency">Price: &nbsp;</span><span class="num">${{product.price}}</span>
+	</var>
 
-
-
-<dl class="row">
-  <dt class="col-sm-4">Title</dt>
-  <dd class="col-sm-8">{{product.title}}</dd>
-
-  <dt class="col-sm-4">Manufacturer</dt>
-  <dd class="col-sm-8"> {{product.manufacturer}} </dd>
-
-  <dt class="col-sm-4">Price</dt>
-  <dd class="col-sm-8">{{product.price}} </dd>
-
-  <dt class="col-sm-4">Description</dt>
-  <dd class="col-sm-8">{{product.description}}</dd>
-	<dt class="col-sm-4">Rating</dt>
-  <dd class="col-sm-8">{{product.rating}}</dd>
+</div> <!-- price-detail-wrap .// -->
+<dl>
+  <dt>Description</dt>
+  <dd><p>{{product.description}}
+  </p></dd>
 </dl>
-<div class="rating-wrap">
+<dl>
+	<i class="fa fa-globe"></i>
+	<dt>Rating</dt>
 
+	<dd>{{product.rating}}/5</dd>
+</dl>
+<!-- <div class="rating-wrap">
 
+	<ul class="rating-stars">
+		<li style="width:80%" class="stars-active">
+			<i class="fa fa-star"></i> <i class="fa fa-star"></i>
+			<i class="fa fa-star"></i> <i class="fa fa-star"></i>
+			<i class="fa fa-star"></i>
+		</li>
+		<li>
+			<i class="fa fa-star"></i> <i class="fa fa-star"></i>
+			<i class="fa fa-star"></i> <i class="fa fa-star"></i>
+			<i class="fa fa-star"></i>
+		</li>
+	</ul>
+	<div class="label-rating">132 reviews</div>
+	<div class="label-rating">154 orders </div>
 </div> <!-- rating-wrap.// -->
+
+<a href="{% url 'visualize' product.id %}">Visualize Data</a>
+
 <hr>
-	<div class="row">
-		 <!-- col.// -->
-		<d<!-- col.// -->
-	</div>
-  <form method="POST" action="{% url 'post' product.id %}" enctype="multipart/form-data">
+	<form method="POST" action = "{% url 'post' product.id %}" enctype="multipart/form-data">
 		{%csrf_token%}
 
-			<div class="form-group col-md-9">
-				<label for="inputEmail4">Comment</label>
-				<input type="textbox" class="form-control form-control-lg"  name="comment" placeholder="Add a Comment">
-				<br/>
-				<input type="submit"  class="btn btn-primary" name="" value="Comment">
-			</div>
-
-
-  </form><!-- row.// -->
+		<div class="form-group col-md-9">
+			<label for ="inputEmail4">Comment</label>
+			<input type="textbox" class="form-control form-control-lg" name="comment" placeholder="Add a comment">
+			<br/>
+			<input type="submit" class="btn btn-primary" name=" " value= "Comment">
+		</div>
+	</form>
 	<hr>
-	<!-- <a href="#" class="btn  btn-warning"> <i class="fa fa-envelope"></i> Contact Supplier </a> -->
-	<!-- <a href="#" class="btn  btn-outline-warning"> Start Order </a> -->
-<!-- short-info-wrap .// -->
+	<h3 class="title mb-3">Comments:</h3>
+	{% for comment in comments %}
+
+		<p>{{comment.comment}}</p>
+
+	{% endfor %}
 </article> <!-- card-body.// -->
 		</aside> <!-- col.// -->
 	</div> <!-- row.// -->
 </main> <!-- card.// -->
+		</div>
 
-<!-- PRODUCT DETAIL -->
-
-
-<!-- PRODUCT DETAIL .// -->
-
-
-
-</div><!-- container // -->
-
+	</div>
 </section>
 
 
-{% endblock %}
+
+
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	{% endblock %}
