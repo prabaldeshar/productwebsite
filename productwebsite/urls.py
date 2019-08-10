@@ -30,5 +30,6 @@ urlpatterns = [
     path('product/', include('product.urls')),
     path('accounts/',include('accounts.urls')),
     path('visualize/<int:product_id>', visualize_views.visualize, name='visualize'),
+    path('map/<int:product_id>',visualize_views.map,name='map')
 
 ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
