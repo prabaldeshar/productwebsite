@@ -70,6 +70,7 @@
 </div> <!-- rating-wrap.// -->
 
 <a href="{% url 'visualize' product.id %}">Visualize Data</a>
+||
 <a href="{% url 'map' product.id %}">Visualize Map</a>
 <hr>
 	<form method="POST" action = "{% url 'post' product.id %}" enctype="multipart/form-data">

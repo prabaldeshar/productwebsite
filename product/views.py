@@ -41,7 +41,7 @@ def detail(request, product_id):
 
 def post(request, product_id):
     if request.method == 'POST':
-        calcRating()
+        calcRating(product_id)
         current_user = request.user
         product = Products.objects.filter(pk=product_id).first()
         if request.POST['comment']:
@@ -54,20 +54,21 @@ def post(request, product_id):
 
             return render(request, 'product/predict.html')
 
-def calcRating():
-    products = Products.objects.all()
+def calcRating(product_id):
+    product = Products.objects.get(pk=product_id)
+    comments = Comment.objects.select_related().filter(product=product_id)
     total_rating=1
-    pos_rating=1
-    for product in products:
-        comments = Comment.objects.select_related().filter(pk=product.id)
-        for comment in comments:
-            total_rating+=1
-            if comment.polarity == 1:
-                pos_rating+=1
-            else:
-                pos_rating = pos_rating
+    pos_rating=0
+    for comment in comments:
+        print(comment.comment)
+        total_rating=total_rating+1
+        if comment.polarity == 1:
+            # print("Postive")
+            pos_rating=pos_rating+1
+        else:
+            pos_rating = pos_rating
 
-        percentage=(pos_rating/total_rating)*100
-        rating = (percentage/100)*5
-        product.rating = rating
-        product.save()
+    percentage=(float(pos_rating)/float(total_rating))*100
+    rating = round(float((percentage/20)),3)
+    product.rating = rating
+    product.save()

@@ -1,21 +1,24 @@
-numDimensions = 300
+numDimensions = 50
 maxSeqLength = 250
-batchSize = 24
+batchSize = 32
 lstmUnits = 128
 numClasses = 2
-iterations = 100000
+iterations = 130000
 
 import numpy as np
 import pandas as pd
 import string
 import re
 import csv
+import tensorflow as tf
 from functools import partial
 import nltk
 from nltk.corpus import wordnet
 from nltk.stem import SnowballStemmer
 from nltk.stem import WordNetLemmatizer
 import tensorflow as tf
+
+
 wordsList = np.load('D:/Sentiment/Glove/wordsList.npy')
 print('Loaded the word list!')
 
@@ -50,7 +53,7 @@ accuracy = tf.reduce_mean(tf.cast(correctPred, tf.float32))
 # load in the network
 sess = tf.InteractiveSession()
 saver = tf.train.Saver()
-saver.restore(sess, tf.train.latest_checkpoint('D:/Sentiment/models1'))
+saver.restore(sess, tf.train.latest_checkpoint('D:/Sentiment/Glove/model1'))
 
 contraction_patterns = [(r'won\'t', 'will not'), (r'can\'t', 'cannot'), (r'willn\'t', 'will not'), (r'doesn\'t', 'does not'),
                         (r'i\'m', 'i am'), (r'don\'t', 'do not'), (r'didn\'t', 'did not'), (r'mayn\'t', 'may not'),
@@ -97,7 +100,7 @@ def cleanSentences(string):
 
 def getSentenceMatrix(sentence):
     #arr = np.zeros([batchSize, maxSeqLength])
-    sentenceMatrix = np.zeros([batchSize,maxSeqLength], dtype='int32')
+    sentenceMatrix = np.zeros([batch_size,maxSeqLength], dtype='int32')
     sentence = sentence.translate(string.punctuation)
     sentence = cleanSentences(sentence)
     sentence = removeEmoticons(sentence)
@@ -114,26 +117,6 @@ def getSentenceMatrix(sentence):
             sentenceMatrix[0,indexCounter] = 399999 #Vector for unkown words
     return sentenceMatrix
 
-"""
-import re
-strip_special_chars = re.compile("[^A-Za-z0-9 ]+")
-
-def cleanSentences(string):
-    string = string.lower().replace("<br />", " ")
-    return re.sub(strip_special_chars, "", string.lower())
-
-def getSentenceMatrix(sentence):
-    #arr = np.zeros([batchSize, maxSeqLength])
-    sentenceMatrix = np.zeros([batchSize,maxSeqLength], dtype='int32')
-    cleanedSentence = cleanSentences(sentence)
-    split = cleanedSentence.split()
-    for indexCounter,word in enumerate(split):
-        try:
-            sentenceMatrix[0,indexCounter] = wordsList.index(word)
-        except ValueError:
-            sentenceMatrix[0,indexCounter] = 399999 #Vector for unkown words
-    return sentenceMatrix
-"""
 
 #inputText ="The phone is good"
 #inputMatrix = getSentenceMatrix(inputText)

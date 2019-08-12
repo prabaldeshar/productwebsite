@@ -87,7 +87,7 @@ def visualize(request, product_id):
     chit_P = 0
     chit_N = 0
     gor_P = 0
-    got_N = 0
+    gor_N = 0
     ilam_P = 0
     ilam_N = 0
     for comment in comments:
@@ -130,7 +130,7 @@ def visualize(request, product_id):
 
     data = {'fruits' : location,
             'pos'   : [kath_P, lalit_P, bkt_P, chit_P, gor_P, ilam_P],
-            'neg'   : [kath_N, lalit_N, bkt_N, chit_N, got_N, ilam_N],
+            'neg'   : [kath_N, lalit_N, bkt_N, chit_N, gor_N, ilam_N],
             }
 
     # this creates [ ("Apples", "2015"), ("Apples", "2016"), ("Apples", "2017"), ("Pears", "2015), ... ]
