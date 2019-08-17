@@ -52,7 +52,7 @@ def post(request, product_id):
             comment.save()
 
 
-            return render(request, 'product/predict.html')
+        return redirect('detail', product_id = product.id)
 
 def calcRating(product_id):
     product = Products.objects.get(pk=product_id)
